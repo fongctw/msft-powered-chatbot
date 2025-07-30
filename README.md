@@ -55,9 +55,9 @@ AZURE_TENANT_ID=                 # Tenant ID (same as above if same directory is
 # Foundry Agent
 AGENT_PROJECT_URL=https://<your-agent-url>   # Foundry Agent endpoint (get this from Azure AI Foundry Portal)
 AGENT_ID=<your_agent_id_here>                # Foundry Agent ID (also from the portal)
-
+```
 ### How to Set Up Microsoft Integration
-
+```
 1. Azure AD App Registration (for Microsoft Login)
 Go to Microsoft Entra ID > App registrations.
 
@@ -81,7 +81,7 @@ Log into the Azure AI Foundry Portal.
 
 Go to your agent project, find the Agent ID and Endpoint URL.
 
-
+```
 
 See further setup details in the code or Foundry Agent documentation.
 
