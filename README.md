@@ -58,16 +58,16 @@ AGENT_ID=<your_agent_id_here>                # Foundry Agent ID (also from the p
 ```
 ### How to Set Up Microsoft Integration
 
-1. Azure AD App Registration (for Microsoft Login)
-Go to Microsoft Entra ID > App registrations.
-``
-Register a new application (e.g., MSFTChatLogin).
-
-Set a Redirect URI (e.g., http://localhost:3000/login/callback).
-
-Copy Application (client) ID, Tenant ID, and generate a client secret.
-
-Use these values in the .env section under Microsoft Login.
+ 1. Azure AD App Registration (for Microsoft Login)
+ Go to Microsoft Entra ID > App registrations.
+   
+   Register a new application (e.g., MSFTChatLogin).
+   
+   Set a Redirect URI (e.g., http://localhost:3000/login/callback).
+   
+   Copy Application (client) ID, Tenant ID, and generate a client secret.
+   
+   Use these values in the .env section under Microsoft Login.
 
 2. Service Principal for Foundry Agent
 Create another App Registration (e.g., MSFTChatAgentAccess).
