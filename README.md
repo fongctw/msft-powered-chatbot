@@ -9,7 +9,7 @@ Built with support for Microsoft login (Azure AD), seamless Foundry Agent integr
 
 ## Features
 - Chatbot interface for user queries
-- Login with Microsoft account (personal or organization ID)
+- Login with Microsoft account (supports both personal Microsoft accounts and organizational accounts via Microsoft Entra ID)
 - Docker support for easy deployment
 - Foundry Agent integration: Supports knowledge injection via Foundry features, such as:
   - Connecting to AI Search (RAG) for retrieval-augmented responses
