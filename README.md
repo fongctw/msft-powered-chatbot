@@ -56,34 +56,55 @@ AZURE_TENANT_ID=                 # Tenant ID (same as above if same directory is
 AGENT_PROJECT_URL=https://<your-agent-url>   # Foundry Agent endpoint (get this from Azure AI Foundry Portal)
 AGENT_ID=<your_agent_id_here>                # Foundry Agent ID (also from the portal)
 ```
-### How to Set Up Microsoft Integration
+## 🔧 How to Set Up Microsoft Integration
 
- 1. Azure AD App Registration (for Microsoft Login)
- Go to Microsoft Entra ID > App registrations.
-   
-   Register a new application (e.g., MSFTChatLogin).
-   
-   Set a Redirect URI (e.g., http://localhost:3000/login/callback).
-   
-   Copy Application (client) ID, Tenant ID, and generate a client secret.
-   
-   Use these values in the .env section under Microsoft Login.
+To enable Microsoft login and connect to Azure AI Foundry Agent, follow these setup steps:
 
-2. Service Principal for Foundry Agent
-Create another App Registration (e.g., MSFTChatAgentAccess).
+---
 
-Generate a client secret and collect Client ID, Tenant ID.
+### 1. 🔐 Azure AD App Registration (for Microsoft Login)
 
-Assign Cognitive Services User role to this Service Principal in Access Control (IAM) for the Azure AI Foundry resource.
+This is used to allow users to log in with their Microsoft account.
 
-3. Get Foundry Agent Info
-Log into the Azure AI Foundry Portal.
+- Navigate to **Microsoft Entra ID > App registrations**
+- Click **“New registration”**
+- Enter a name (e.g., `MSFTChatLogin`)
+- Set a **Redirect URI** (e.g., `http://localhost:3000/login/callback`)
+- After registration:
+  - Copy the **Application (client) ID**
+  - Copy the **Directory (tenant) ID**
+  - Go to **Certificates & secrets** and generate a **Client Secret**
+- Use these values in the `.env` file under the **Microsoft Login** section
 
-Go to your agent project, find the Agent ID and Endpoint URL.
+---
 
+### 2. 🛠️ Service Principal for Foundry Agent Access
 
+This service principal will be used to authenticate your chatbot to Azure AI Foundry.
 
-See further setup details in the code or Foundry Agent documentation.
+- Go to **App registrations** > **New registration**
+- Enter a name (e.g., `MSFTChatAgentAccess`)
+- Register and generate a **Client Secret**
+- Copy the **Client ID** and **Tenant ID**
+- Go to your **Azure AI Foundry** resource > **Access Control (IAM)**
+  - Click **Add role assignment**
+  - Assign the **Cognitive Services User** role to this app registration
+
+---
+
+### 3. 🌐 Get Foundry Agent Information
+
+To connect your chatbot with the correct Foundry Agent:
+
+- Go to the [Azure AI Foundry Portal](https://portal.azure.com)
+- Navigate to your **Agent Project**
+- Copy the **Agent ID**
+- Copy the **Agent Endpoint URL**
+- Add both values to the `.env` file under **Foundry Agent**
+
+---
+
+💡 For full integration, make sure all the corresponding values are set correctly in the `.env` file. See the `.env` section above for details.
 
 
 ## Getting Started
