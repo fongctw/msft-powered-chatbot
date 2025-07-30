@@ -57,10 +57,10 @@ AGENT_PROJECT_URL=https://<your-agent-url>   # Foundry Agent endpoint (get this 
 AGENT_ID=<your_agent_id_here>                # Foundry Agent ID (also from the portal)
 ```
 ### How to Set Up Microsoft Integration
-```
+
 1. Azure AD App Registration (for Microsoft Login)
 Go to Microsoft Entra ID > App registrations.
-
+``
 Register a new application (e.g., MSFTChatLogin).
 
 Set a Redirect URI (e.g., http://localhost:3000/login/callback).
@@ -81,7 +81,7 @@ Log into the Azure AI Foundry Portal.
 
 Go to your agent project, find the Agent ID and Endpoint URL.
 
-```
+
 
 See further setup details in the code or Foundry Agent documentation.
 
