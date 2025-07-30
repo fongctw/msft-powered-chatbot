@@ -2,11 +2,19 @@
 
 A chatbot web application powered by Microsoft technologies. This project includes a Python backend and a static frontend for user interaction.
 
+MSFT Powered Chatbot is designed to be a **personal or organizational AI agent** that can securely integrate with your Microsoft ecosystem. Whether you're an individual looking for a smart assistant, or an enterprise deploying an internal knowledge bot, this chatbot can serve as your intelligent companion — connected to your tools, documents, and domain knowledge.
+
+Built with support for Microsoft login (Azure AD), seamless Foundry Agent integration, and customizable prompts, this solution is both **secure** and **highly extensible**. Deploy it privately or across your organization to supercharge internal search, automate support, or drive decision-making with AI-powered insights.
+
+
 ## Features
 - Chatbot interface for user queries
 - Login with Microsoft account (personal or organization ID)
 - Docker support for easy deployment
-- Specific domain knowledge: The chatbot can answer domain-specific questions via the integrated Foundry Agent
+- Foundry Agent integration: Supports knowledge injection via Foundry features, such as:
+  - Connecting to AI Search (RAG) for retrieval-augmented responses
+  - Integrating with SharePoint, local documents, and other data sources
+  - Configuring system prompts to shape the chatbot's behavior and personality
 
 ## Project Structure
 ```
@@ -66,9 +74,8 @@ To enable Microsoft login and connect to Azure AI Foundry Agent, follow these se
 
 This is used to allow users to log in with their Microsoft account.
 
-- Navigate to **Microsoft Entra ID > App registrations**
-- Click **“New registration”**
-- Enter a name (e.g., `MSFTChatLogin`)
+- Go to **App registrations** > **New registration**
+- Enter a name (e.g., `MSFTChatLoginAccess`)
 - Set a **Redirect URI** (e.g., `http://localhost:3000/login/callback`)
 - After registration:
   - Copy the **Application (client) ID**
@@ -98,8 +105,8 @@ To connect your chatbot with the correct Foundry Agent:
 
 - Go to the [Azure AI Foundry Portal](https://portal.azure.com)
 - Navigate to your **Agent Project**
-- Copy the **Agent ID**
 - Copy the **Agent Endpoint URL**
+-  Copy the **Agent ID**
 - Add both values to the `.env` file under **Foundry Agent**
 
 ---
