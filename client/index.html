@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KM Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/vars.css">
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    a, button, input, select, h1, h2, h3, h4, h5, * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-decoration: none;
+      background: none;
+      -webkit-font-smoothing: antialiased;
+    }
+    menu, ol, ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-left">
+        <img class="image-1" src="/assets/idea.png" />
+        <div class="enterprise-chat-portal">Knowledge Management Chat</div>
+        <button onclick="window.location.href='/logout'" id="buttonlogout">Logout</button>
+        <!-- <div class="version-2-0-0">Version 1.0</div> -->
+      </div>
+      <div class="tabs"></div>
+      <div class="button3"></div>
+    </div>
+
+    <div class="center-content">
+      <div class="chatbot-messages" id="chatbotMessages">
+        <!-- Chat bubbles will appear here -->
+      </div>
+      <form class="chatbot-form" id="chatbotForm" autocomplete="off">
+        <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit" class="chatbot-send" aria-label="Send"></button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // 🔒 Check login session
+   fetch("/me")
+  .then(res => res.json())
+  .then(data => {
+    if (data.error) {
+      window.location.href = "/login";
+    } else {
+      console.log("👤 Logged in as", data.name);
+    }
+  });
+
+
+    // 🌗 Load saved theme
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-theme");
+    }
+
+    // 💬 Chatbot logic
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById("chatbotForm");
+      const inputEl = document.getElementById("chatbotInput");
+      const chatBox = document.getElementById("chatbotMessages");
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const userMessage = inputEl.value.trim();
+        if (!userMessage) return;
+
+        // 🗨️ Show user message
+        const userBubble = document.createElement("div");
+        userBubble.className = "chatbot-message user";
+        userBubble.innerText = userMessage;
+        chatBox.appendChild(userBubble);
+        inputEl.value = "";
+
+        try {
+          const res = await fetch("/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userMessage })
+          });
+
+          const data = await res.json();
+          const aiMessage = data.reply || data.error || "⚠️ ไม่มีคำตอบจาก Agent";
+
+          const botBubble = document.createElement("div");
+          botBubble.className = "chatbot-message";
+          botBubble.innerText = aiMessage;
+          chatBox.appendChild(botBubble);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (err) {
+          const errorBubble = document.createElement("div");
+          errorBubble.className = "chatbot-message";
+          errorBubble.innerText = "❌ ไม่สามารถเชื่อมต่อกับ AI Agent ได้";
+          chatBox.appendChild(errorBubble);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

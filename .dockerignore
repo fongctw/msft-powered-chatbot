@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.venv/
+
+# Git
+.git/
+.gitignore
+
+# IDEs
+.vscode/
+*.code-workspace
+
+# Node
+node_modules/
+
+# Env secret file
