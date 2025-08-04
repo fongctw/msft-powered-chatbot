@@ -5,12 +5,12 @@
   <title>KM Chatbot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Font -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
+  
   <link rel="stylesheet" href="/vars.css">
   <link rel="stylesheet" href="/style.css">
 
@@ -38,7 +38,7 @@
         <img class="image-1" src="/assets/idea.png" />
         <div class="enterprise-chat-portal">Knowledge Management Chat</div>
         <button onclick="window.location.href='/logout'" id="buttonlogout">Logout</button>
-        <!-- <div class="version-2-0-0">Version 1.0</div> -->
+        
       </div>
       <div class="tabs"></div>
       <div class="button3"></div>
@@ -46,7 +46,7 @@
 
     <div class="center-content">
       <div class="chatbot-messages" id="chatbotMessages">
-        <!-- Chat bubbles will appear here -->
+        
       </div>
       <form class="chatbot-form" id="chatbotForm" autocomplete="off">
         <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Type your message..." autocomplete="off" />
@@ -68,13 +68,13 @@
   });
 
 
-    // 🌗 Load saved theme
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.body.classList.add("dark-theme");
-    }
+    // // 🌗 Load saved theme
+    // const savedTheme = localStorage.getItem("theme");
+    // if (savedTheme === "dark") {
+    //   document.body.classList.add("dark-theme");
+    // }
 
-    // 💬 Chatbot logic
+    
     document.addEventListener("DOMContentLoaded", function () {
       const form = document.getElementById("chatbotForm");
       const inputEl = document.getElementById("chatbotInput");
