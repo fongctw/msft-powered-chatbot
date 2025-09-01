@@ -84,44 +84,7 @@ def me():
         return jsonify(session["user"])
     return jsonify({"error": "unauthorized"}), 401
 
-# 🟢 Ask the agent
-# @app.route("/ask", methods=["POST"])
-# def ask():
-#     if "user" not in session:
-#         return jsonify({"error": "not authenticated"}), 401
 
-#     user_input = request.json.get("message", "")
-#     if not user_input:
-#         return jsonify({"error": "No input"}), 400
-
-#     try:
-#         # ✅ Create thread if not exist
-#         if "thread_id" not in session:
-#             thread = agent_client.threads.create()
-#             session["thread_id"] = thread.id
-#         else:
-#             thread = agent_client.threads.get(session["thread_id"])
-
-#         # ✅ Send user message
-#         agent_client.messages.create(thread_id=thread.id, role="user", content=user_input)
-
-#         # ✅ Run agent
-#         run = agent_client.runs.create_and_process(thread_id=thread.id, agent_id=AGENT_ID)
-
-#         # ✅ Wait for run to complete
-#         while run.status in ("queued", "in_progress"):
-#             time.sleep(1)
-#             run = agent_client.runs.get(thread_id=thread.id, run_id=run.id)
-
-#         # ✅ Get latest assistant message
-#         messages = agent_client.messages.list(thread_id=thread.id, order=ListSortOrder.ASCENDING)
-#         for m in messages:
-#             if m.role == "assistant" and m.text_messages:
-#                 return jsonify({"reply": m.text_messages[-1].text.value})
-
-#         return jsonify({"reply": "❌ ไม่มีข้อความตอบกลับ"})
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
 @app.route("/ask", methods=["POST"])
 def ask():
     if "user" not in session:
@@ -154,14 +117,6 @@ def ask():
 
        
 
-        # --- โค้ดเดิม ---
-        # messages = agent_client.messages.list(thread_id=thread.id, order=ListSortOrder.DESCENDING)
-        # for m in messages:
-        #     if m.role == "assistant" and m.text_messages:
-        #         return jsonify({"reply": m.text_messages[0].text.value})
-        # return jsonify({"reply": "❌ ไม่มีข้อความตอบกลับ"})
-
-        # --- โค้ดใหม่: ตรวจสอบคำตอบซ้ำ/ใหม่ ---
         messages = agent_client.messages.list(thread_id=thread.id, order=ListSortOrder.DESCENDING)
         last_reply = None
         last_status = ""
